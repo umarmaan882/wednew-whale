@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellowhale-deployment
+  labels:
+    app: hellowhale
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hellowhale
+  template:
+    metadata:
+      labels:
+        app: hellowhale 
+    spec:
+      containers:
+      - name: whale
+        image: umarmaan882/hellowhale:v1
+        ports:
+        - containerPort: 80
+        
+        
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: whale-service
+spec:
+  selector:
+    app: hellowhale 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 31110
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whale.com
+spec:
+  rules:
+    - host: whale.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: whale-service
+                port:
+                  number: 80
