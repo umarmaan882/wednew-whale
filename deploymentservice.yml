@@ -36,21 +36,3 @@ spec:
     port: 80
     targetPort: 80
     nodePort: 31110
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: whale.com
-spec:
-  rules:
-    - host: whale.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: whale-service
-                port:
-                  number: 80
