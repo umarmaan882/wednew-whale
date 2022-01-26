@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "umarmaan882/hellowhale:v2"
+    dockerimagename = "umarmaan882/wednewwhale:v3"
     dockerImage = ""
   }
 
@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/umarmaan882/Wed-whale.git'
+        git 'https://github.com/umarmaan882/Wednew-whale.git'
       }
     }
 
