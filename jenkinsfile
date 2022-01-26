@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    dockerimagename = "umarmaan882/hellowhale:v1"
+    dockerimagename = "umarmaan882/hellowhale:v2"
     dockerImage = ""
   }
 
@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/umarmaan882/hello-whale.git'
+        git 'https://github.com/umarmaan882/Wed-whale.git'
       }
     }
 
@@ -22,16 +22,10 @@ pipeline {
         }
       }
     }
-
-    stage('Pushing Image') {
-      environment {
-               registryCredential = 'dockerhub'
-           }
-      steps{
+    stage('Deploying App to Kubernetes') {
+      steps {
         script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
-          }
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
         }
       }
     }
