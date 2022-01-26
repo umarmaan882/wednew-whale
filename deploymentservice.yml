@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hellowhale-deployment
+  name: hellowedwhale-deployment
   labels:
-    app: hellowhale
+    app: hellowedwhale
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hellowhale
+      app: hellowedwhale
   template:
     metadata:
       labels:
-        app: hellowhale 
+        app: hellowedwhale 
     spec:
       containers:
-      - name: whale
+      - name: hellowedwhale
         image: umarmaan882/hellowhale:v1
         ports:
         - containerPort: 80
@@ -26,13 +26,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: whale-service
+  name: wedwhale-service
 spec:
   selector:
-    app: hellowhale 
+    app: hellowedwhale 
   type: LoadBalancer
   ports:
   - protocol: TCP
     port: 80
     targetPort: 80
-    nodePort: 31110
+    nodePort: 31117
