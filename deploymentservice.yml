@@ -36,3 +36,23 @@ spec:
     port: 80
     targetPort: 80
     nodePort: 31118
+---
+
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wednewwhale.com
+spec:
+  rules:
+    - host: wednewwhale.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wednewwhale-service
+                port:
+                  number: 80
+
